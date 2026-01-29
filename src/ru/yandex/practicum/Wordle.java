@@ -54,9 +54,7 @@ public class Wordle {
                     System.out.println("Результат: " + input.toUpperCase());
                     System.out.println("Подсказка: " + analysis);
                     game.registerStep(input);
-                }
-                catch (WordleGameException e) {
-                    // Обработка игровых ситуаций без прерывания программы
+                } catch (WordleGameException e) { // Обработка игровых ситуаций без прерывания программы
                     System.out.println("Внимание: " + e.getMessage());
                     log.println("Игровая ошибка: " + e.getMessage());
                 }
