@@ -38,8 +38,12 @@ public class Wordle {
                     continue;
                 }
                 try {
-                    if (input.length() != 5) throw new InvalidWordLengthException();
-                    if (!dictionary.contains(input)) throw new WordNotFoundException(input);
+                    if (input.length() != 5) {
+                        throw new InvalidWordLengthException();
+                    }
+                    if (!dictionary.contains(input)) {
+                        throw new WordNotFoundException(input);
+                    }
                     // Если проверки прошли
                     if (game.isWin(input)) {
                         System.out.println("ПОБЕДА! Вы угадали слово.");
