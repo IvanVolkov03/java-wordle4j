@@ -57,7 +57,7 @@ public class WordleGame {
         for (String word : shuffledWords) {
             if (isValidHint(word) && !history.contains(word)
                     && !givenHints.contains(word)
-                    && !word.equals(answer)){
+                    && !word.equals(answer)) {
                 givenHints.add(word);
                 log.println("Выдана новая подсказка: " + word);
                 return word;
@@ -92,14 +92,20 @@ public class WordleGame {
         return steps > 0;
     }
 
-    public int getSteps() { return steps; }
+    public int getSteps() {
+        return steps;
+    }
 
-    public String getAnswer() { return answer; }
+    public String getAnswer() {
+        return answer;
+    }
 
     public static class WordleGameException extends Exception {
         @Serial
         private static final long serialVersionUID = 2271712293092767565L;
-        public WordleGameException(String message) { super(message); }
+        public WordleGameException(String message) {
+            super(message);
+        }
     }
 
     public static class WordNotFoundException extends WordleGameException {

@@ -3,6 +3,7 @@ package ru.yandex.practicum;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+
 import ru.yandex.practicum.WordleGame.WordleGameException;
 import ru.yandex.practicum.WordleGame.WordNotFoundException;
 import ru.yandex.practicum.WordleGame.InvalidWordLengthException;
