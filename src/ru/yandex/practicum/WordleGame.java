@@ -101,14 +101,17 @@ public class WordleGame {
     }
 
     public static class WordleGameException extends Exception {
+
         @Serial
         private static final long serialVersionUID = 2271712293092767565L;
+
         public WordleGameException(String message) {
             super(message);
         }
     }
 
     public static class WordNotFoundException extends WordleGameException {
+
         @Serial
         private static final long serialVersionUID = 2839830577705095759L;
         public WordNotFoundException(String word) {
@@ -117,6 +120,7 @@ public class WordleGame {
     }
 
     public static class InvalidWordLengthException extends WordleGameException {
+
         @Serial
         private static final long serialVersionUID = 2510651373681248114L;
         public InvalidWordLengthException() {
