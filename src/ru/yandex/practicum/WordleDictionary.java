@@ -7,6 +7,7 @@ import java.util.Random;
     его методы похожи на методы списка, но учитывают особенности игры
     также этот класс может содержать рутинные функции по сравнению слов, букв и т.д.
  */
+
 public class WordleDictionary {
     private final Random random = new Random();
     private final List<String> words;
