@@ -50,13 +50,11 @@ public class Wordle {
                         log.println("Игрок победил.");
                         return;
                     }
-                    
                     String analysis = game.analyze(input);
                     System.out.println("Результат: " + input.toUpperCase());
                     System.out.println("Подсказка: " + analysis);
                     game.registerStep(input);
-                }
-                catch (WordleGameException e) {
+                } catch (WordleGameException e) {
                     // Обработка игровых ситуаций без прерывания программы
                     System.out.println("Внимание: " + e.getMessage());
                     log.println("Игровая ошибка: " + e.getMessage());
