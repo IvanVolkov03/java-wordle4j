@@ -14,6 +14,7 @@ import java.util.*;
     предложат слово-подсказку с учётом всего, что вводил пользователь ранее
 не забудьте про специальные типы исключений для игровых и неигровых ошибок
  */
+
 public class WordleGame {
     private final String answer;
     private int steps = 6;

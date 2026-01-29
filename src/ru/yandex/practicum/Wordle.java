@@ -16,6 +16,7 @@ import ru.yandex.practicum.WordleGame.InvalidWordLengthException;
     вызвать игровой метод в котором в цикле опрашивать пользователя и передавать информацию в игру
     вывести состояние игры и конечный результат
  */
+
 public class Wordle {
     public static void main(String[] args) {
         try (PrintWriter log = new PrintWriter(new FileWriter("game.log", StandardCharsets.UTF_8, true), true);
