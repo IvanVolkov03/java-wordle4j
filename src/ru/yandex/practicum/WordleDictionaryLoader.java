@@ -11,6 +11,7 @@ import java.util.List;
     ему нужны методы по загрузке списка слов из файла по имени файла
     на выходе должен быть класс WordleDictionary
  */
+
 public class WordleDictionaryLoader {
     public static WordleDictionary load(String fileName) throws IOException {
         List<String> words = new ArrayList<>();
