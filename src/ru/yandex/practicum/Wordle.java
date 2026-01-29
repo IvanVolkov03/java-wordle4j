@@ -49,7 +49,7 @@ public class Wordle {
                         System.out.println("ПОБЕДА! Вы угадали слово.");
                         log.println("Игрок победил.");
                         return;
-                    }
+                  }
                     String analysis = game.analyze(input);
                     System.out.println("Результат: " + input.toUpperCase());
                     System.out.println("Подсказка: " + analysis);
