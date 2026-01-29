@@ -114,14 +114,12 @@ public class WordleGame {
 
         @Serial
         private static final long serialVersionUID = 2839830577705095759L;
-        
         public WordNotFoundException(String word) {
             super("Слово '" + word + "' не найдено в словаре.");
         }
     }
 
     public static class InvalidWordLengthException extends WordleGameException {
-
         @Serial
         private static final long serialVersionUID = 2510651373681248114L;
 
