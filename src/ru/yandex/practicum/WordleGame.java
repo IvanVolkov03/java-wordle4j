@@ -1,7 +1,6 @@
 package ru.yandex.practicum;
 
 import java.io.PrintWriter;
-import java.io.Serial;
 import java.util.*;
 
 public class WordleGame {
@@ -98,7 +97,5 @@ public class WordleGame {
     public String getAnswer() {
         return answer;
     }
-
-
 }
 
