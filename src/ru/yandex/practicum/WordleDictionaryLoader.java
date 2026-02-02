@@ -9,6 +9,7 @@ import java.util.List;
 
 public class WordleDictionaryLoader {
     private static final int TARGET_WORD_LENGTH = 5;
+    
     public static WordleDictionary load(String fileName) throws IOException {
         List<String> words = new ArrayList<>();
 
