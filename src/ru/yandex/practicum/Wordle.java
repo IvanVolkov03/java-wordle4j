@@ -4,21 +4,13 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-import ru.yandex.practicum.WordleGame.WordleGameException;
-import ru.yandex.practicum.WordleGame.WordNotFoundException;
-import ru.yandex.practicum.WordleGame.InvalidWordLengthException;
-
-/*
-в главном классе нам нужно:
-    создать лог-файл (он должен передаваться во все классы)
-    создать загрузчик словарей WordleDictionaryLoader
-    загрузить словарь WordleDictionary с помощью класса WordleDictionaryLoader
-    затем создать игру WordleGame и передать ей словарь
-    вызвать игровой метод в котором в цикле опрашивать пользователя и передавать информацию в игру
-    вывести состояние игры и конечный результат
- */
+import ru.yandex.practicum.exception.WordNotFoundException;
+import ru.yandex.practicum.exception.InvalidWordLengthException;
+import ru.yandex.practicum.exception.WordleGameException;
 
 public class Wordle {
+    private static final int TARGET_WORD_LENGTH = 5;
+
     public static void main(String[] args) {
         try (PrintWriter log = new PrintWriter(new FileWriter("game.log", StandardCharsets.UTF_8, true), true);
              Scanner scanner = new Scanner(System.in)) {
@@ -39,7 +31,7 @@ public class Wordle {
                     continue;
                 }
                 try {
-                    if (input.length() != 5) {
+                    if (input.length() != TARGET_WORD_LENGTH) {
                         throw new InvalidWordLengthException();
                     }
                     if (!dictionary.contains(input)) {

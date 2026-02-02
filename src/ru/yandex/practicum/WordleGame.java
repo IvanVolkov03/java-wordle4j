@@ -4,17 +4,6 @@ import java.io.PrintWriter;
 import java.io.Serial;
 import java.util.*;
 
-/*
-в этом классе хранится словарь и состояние игры
-    текущий шаг
-    всё что пользователь вводил
-    правильный ответ
-в этом классе нужны методы, которые
-    проанализируют совпадение слова с ответом
-    предложат слово-подсказку с учётом всего, что вводил пользователь ранее
-не забудьте про специальные типы исключений для игровых и неигровых ошибок
- */
-
 public class WordleGame {
     private final String answer;
     private int steps = 6;
@@ -22,6 +11,7 @@ public class WordleGame {
     private final List<String> history = new ArrayList<>();
     private final Set<String> givenHints = new HashSet<>();  // Слова, уже выданные как подсказки
     private final PrintWriter log;
+    private static final int TARGET_WORD_LENGTH = 5;
 
     public WordleGame(WordleDictionary dictionary, PrintWriter log) {
         this.dictionary = dictionary;
@@ -33,7 +23,7 @@ public class WordleGame {
     // Анализ совпадения букв
     public String analyze(String guess) {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < TARGET_WORD_LENGTH; i++) {
             char g = guess.charAt(i);
             if (g == answer.charAt(i)) {
                 result.append("🟩"); // Верное место
@@ -51,11 +41,22 @@ public class WordleGame {
         log.println("Пользователь запросил подсказку.");
         if (history.isEmpty()) return dictionary.getRandomWord();
 
+        // Один раз создам "маску" известных зеленых букв
+        // Это займет очень мало, максимум 5 * 5 = 25 итераций (количество попыток * на кол-во букв)
+        char[] mask = new char[TARGET_WORD_LENGTH];
+        for (String attempt : history) {
+            for (int i = 0; i < TARGET_WORD_LENGTH; i++) {
+                if (attempt.charAt(i) == answer.charAt(i)) {
+                    mask[i] = answer.charAt(i);
+                }
+            }
+        }
+
         List<String> shuffledWords = new ArrayList<>(dictionary.getAllWords());
         Collections.shuffle(shuffledWords);
 
         for (String word : shuffledWords) {
-            if (isValidHint(word) && !history.contains(word)
+            if (isValidHint(word, mask) && !history.contains(word)
                     && !givenHints.contains(word)
                     && !word.equals(answer)) {
                 givenHints.add(word);
@@ -66,13 +67,11 @@ public class WordleGame {
         return dictionary.getRandomWord();
     }
 
-    private boolean isValidHint(String word) {
-        // Берем слова, где буквы на своих местах (из истории)
-        for (String attempt : history) {
-            for (int i = 0; i < 5; i++) {
-                if (attempt.charAt(i) == answer.charAt(i)) {
-                    if (word.charAt(i) != answer.charAt(i)) return false;
-                }
+    private boolean isValidHint(String word, char[] mask) {
+        for (int i = 0; i < TARGET_WORD_LENGTH; i++) {
+            // Если в маске есть буква, а в слове на этом месте — нет, слово не подходит
+            if (mask[i] != '\0' && word.charAt(i) != mask[i]) {
+                return false;
             }
         }
         return true;
@@ -100,32 +99,6 @@ public class WordleGame {
         return answer;
     }
 
-    public static class WordleGameException extends Exception {
 
-        @Serial
-        private static final long serialVersionUID = 2271712293092767565L;
-
-        public WordleGameException(String message) {
-            super(message);
-        }
-    }
-
-    public static class WordNotFoundException extends WordleGameException {
-        @Serial
-        private static final long serialVersionUID = 2839830577705095759L;
-
-        public WordNotFoundException(String word) {
-            super("Слово '" + word + "' не найдено в словаре.");
-        }
-    }
-
-    public static class InvalidWordLengthException extends WordleGameException {
-        @Serial
-        private static final long serialVersionUID = 2510651373681248114L;
-
-        public InvalidWordLengthException() {
-            super("Слово должно состоять ровно из 5 букв.");
-        }
-    }
 }
 
